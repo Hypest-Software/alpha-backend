@@ -34,6 +34,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	runtimeOnly("org.postgresql:postgresql:42.2.18")
 	implementation("org.flywaydb:flyway-core:7.2.0")
+	implementation("io.zonky.test:embedded-database-spring-test:1.6.0")
+	implementation("io.zonky.test.postgres:embedded-postgres-binaries-bom:13.1.0")
 }
 
 tasks.withType<Test> {
