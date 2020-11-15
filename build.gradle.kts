@@ -32,8 +32,7 @@ dependencies {
 
 	//persistence
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	runtimeOnly("com.h2database:h2")
-	runtimeOnly("org.postgresql:postgresql")
+	runtimeOnly("org.postgresql:postgresql:42.2.18")
 	implementation("org.flywaydb:flyway-core:7.2.0")
 }
 
