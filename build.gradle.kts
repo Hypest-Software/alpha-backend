@@ -12,6 +12,10 @@ group = "dev.hypestsoftware"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
+tasks.bootJar {
+	archiveFileName.set("backend.jar")
+}
+
 repositories {
 	mavenCentral()
 }
