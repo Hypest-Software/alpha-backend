@@ -14,20 +14,20 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "users")
-open class User(
+class User(
     @Id
     @GeneratedValue
     @Column(columnDefinition = "uuid", updatable = false)
-    open val uuid: UUID = UUID.randomUUID(),
+    val uuid: UUID = UUID.randomUUID(),
 
     @Column(unique = true, nullable = false)
-    open var username: String,
+    var username: String,
 
     @Column(nullable = false)
-    open var password: String,
+    var password: String,
 
     @Column
-    open var enabled: Boolean,
+    var enabled: Boolean,
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
     @JoinTable(
@@ -35,5 +35,5 @@ open class User(
         joinColumns = [JoinColumn(name = "user_uuid")],
         inverseJoinColumns = [JoinColumn(name = "role_uuid")]
     )
-    open var roles: MutableSet<Role> = mutableSetOf(),
+    var roles: MutableSet<Role> = mutableSetOf(),
 )
