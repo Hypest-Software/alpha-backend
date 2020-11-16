@@ -21,6 +21,10 @@ class ApiError(
         internalErrorCode = ex.code
     )
 
-    constructor(status: HttpStatus, message: String?, code: ApiErrorCode) :
-            this(status = status, message = message, code = code.id(), internalErrorCode = code)
+    constructor(status: HttpStatus, message: String?, code: ApiErrorCode) : this(
+        status = status,
+        message = message,
+        code = code.id(),
+        internalErrorCode = code
+    )
 }

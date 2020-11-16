@@ -97,8 +97,8 @@ class AuthorizationServerConfiguration(
             .scopes("read", "write")
             .authorizedGrantTypes("password", "refresh_token")
             .authorities(*RoleName.values().map { it.name }.toTypedArray())
-            .accessTokenValiditySeconds(60 * 15) //15 minutes
-            .refreshTokenValiditySeconds(24 * 60 * 60) //1 day
+            .accessTokenValiditySeconds(60 * 15) // 15 minutes
+            .refreshTokenValiditySeconds(24 * 60 * 60) // 1 day
     }
 
     @Bean

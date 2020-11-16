@@ -34,10 +34,8 @@ class CustomJwtTokenStore(
     fun deleteAllRefreshTokensByUsername(username: String) =
         customJdbcTokenStore.deleteAllRefreshTokensByUsername(username)
 
-
     fun deleteExpiredRefreshTokens() =
         customJdbcTokenStore.deleteExpiredRefreshTokens()
-
 }
 
 @Component
@@ -77,8 +75,7 @@ class CustomJdbcTokenStore(
         return jdbcTemplate.update(
             REFRESH_TOKEN_DELETE_EXPIRED_STATEMENT, arrayOf(
                 Instant.now().toEpochMilli()
-            ),
-            intArrayOf(Types.BIGINT)
+            ), intArrayOf(Types.BIGINT)
         )
     }
 }

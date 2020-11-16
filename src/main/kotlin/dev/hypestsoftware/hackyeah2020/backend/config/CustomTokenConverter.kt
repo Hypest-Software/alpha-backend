@@ -27,6 +27,4 @@ class CustomTokenConverter(private val userService: UserService) :
         (accessToken as DefaultOAuth2AccessToken).additionalInformation = additionalInfo
         return accessToken
     }
-
 }
-
