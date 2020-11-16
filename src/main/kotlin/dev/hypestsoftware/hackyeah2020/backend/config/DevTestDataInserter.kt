@@ -42,7 +42,7 @@ class DevTestDataInserter : ApplicationRunner {
                 )
             )
 
-            val role = Role(name = RoleName.ROLE_ADMIN, user = user)
+            val role = Role(name = RoleName.ROLE_ADMIN, users = mutableSetOf(user))
             roleRepository.save(role)
         } else {
             logger.info("Skipped inserting development test data because data already exists")
