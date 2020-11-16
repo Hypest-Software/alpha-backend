@@ -24,9 +24,6 @@ class DevTestDataInserter : ApplicationRunner {
     @Autowired
     private lateinit var userRepository: UserRepository
 
-    @Autowired
-    private lateinit var roleRepository: RoleRepository
-
     private val logger = LoggerFactory.getLogger(DevTestDataInserter::class.java)
 
     @Transactional
