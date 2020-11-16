@@ -15,14 +15,14 @@ CREATE TABLE users (
     uuid uuid NOT NULL,
     enabled boolean,
     password character varying(255) NOT NULL,
-    email character varying(255) NOT NULL
+    username character varying(255) NOT NULL
 );
 
 ALTER TABLE ONLY roles
     ADD CONSTRAINT roles_pkey PRIMARY KEY (uuid);
 
 ALTER TABLE ONLY users
-    ADD CONSTRAINT users_email UNIQUE (email);
+    ADD CONSTRAINT users_username UNIQUE (username);
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (uuid);
