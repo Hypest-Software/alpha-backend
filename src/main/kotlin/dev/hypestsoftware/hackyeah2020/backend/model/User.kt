@@ -1,6 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.model
 
-import java.util.*
+import java.util.UUID
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
