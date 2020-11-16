@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
+
 @RestController
 @RequestMapping("$PUBLIC_API_ENDPOINT_V1/users")
 class UserController(
@@ -21,7 +22,7 @@ class UserController(
     @GetMapping("/me")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     fun getMe(): CurrentUserDto {
-        val uuid = tokenInfo.userUUID ?: ApiErrorCode.AU_0003.throwException()
+        val uuid = tokenInfo.userUUID ?: ApiErrorCode.AUTH_0003.throwException()
         var user: User? = null
         if (ValidationUtils.isStringUUID(uuid)) {
             user = userService.getUserByUUID(uuid)
@@ -33,7 +34,7 @@ class UserController(
                 userUUID = user.uuid.toString()
             )
         } else {
-            ApiErrorCode.AU_0004.throwException()
+            ApiErrorCode.AUTH_0004.throwException()
         }
     }
 }

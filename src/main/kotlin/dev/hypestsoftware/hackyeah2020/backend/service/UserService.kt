@@ -36,7 +36,7 @@ class UserServiceImpl(
             loggedInUser.password = passwordEncoder.encode(newPassword)
             userRepository.save(loggedInUser)
         } else {
-            ApiErrorCode.AU_0001.throwException()
+            ApiErrorCode.AUTH_0001.throwException()
         }
     }
 
@@ -68,7 +68,7 @@ class UserServiceImpl(
 
             userRepository.save(oldUser)
         } else {
-            ApiErrorCode.AU_0002.throwException()
+            ApiErrorCode.AUTH_0002.throwException()
         }
     }
 
