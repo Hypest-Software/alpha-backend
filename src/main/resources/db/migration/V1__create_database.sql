@@ -7,9 +7,8 @@ CREATE SEQUENCE hibernate_sequence
 
 CREATE TABLE roles
 (
-    uuid    uuid NOT NULL,
-    name    character varying(255),
-    user_id uuid NOT NULL
+    uuid uuid NOT NULL,
+    name character varying(255)
 );
 
 CREATE TABLE users

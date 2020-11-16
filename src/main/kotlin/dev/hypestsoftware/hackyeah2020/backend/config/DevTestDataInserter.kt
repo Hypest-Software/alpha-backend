@@ -34,16 +34,16 @@ class DevTestDataInserter : ApplicationRunner {
         if (insertTestData && !userRepository.findAll().any()) {
             logger.info("Inserting development test user data")
             // The encrypted password is `pass`
-            val user = userRepository.save(
-                User(
-                    username = "user",
-                    password = "{bcrypt}\$2a\$10\$cyf5NfobcruKQ8XGjUJkEegr9ZWFqaea6vjpXWEaSqTa2xL9wjgQC",
-                    enabled = true
-                )
+            val user = User(
+                username = "user",
+                password = "{bcrypt}\$2a\$10\$cyf5NfobcruKQ8XGjUJkEegr9ZWFqaea6vjpXWEaSqTa2xL9wjgQC",
+                enabled = true
             )
 
-            val role = Role(name = RoleName.ROLE_ADMIN, users = mutableSetOf(user))
-            roleRepository.save(role)
+            val role = Role(name = RoleName.ROLE_ADMIN)
+
+            user.roles = mutableSetOf(role)
+            userRepository.save(user) // saving role is redundant because of cascade all set on user entity
         } else {
             logger.info("Skipped inserting development test data because data already exists")
         }
