@@ -24,7 +24,7 @@ class CustomTokenConverter(private val userService: UserService) :
             if (user != null) {
                 val userUUID = user.uuid
 
-                additionalInfo["user-uuid"] = userUUID.toString()
+                additionalInfo["user_uuid"] = userUUID.toString()
             }
         }
 

@@ -17,7 +17,7 @@ import kotlin.reflect.full.memberProperties
 annotation class JwtField(val fieldKey: String)
 
 open class TokenInfo(
-    @property:JwtField("user-uuid")
+    @property:JwtField("user_uuid")
     open var userUUID: String? = null,
     @property:JwtField("user_name")
     open var userName: String? = null,
