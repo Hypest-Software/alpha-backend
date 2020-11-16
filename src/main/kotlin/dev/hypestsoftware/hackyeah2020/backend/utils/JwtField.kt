@@ -21,8 +21,7 @@ open class TokenInfo(
     open var userUUID: String? = null,
     @property:JwtField("user_name")
     open var userName: String? = null,
-
-    ) {
+) {
     override fun toString(): String {
         return "TokenInfo(userUUID=$userUUID, userName=$userName)"
     }
