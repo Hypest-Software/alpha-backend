@@ -73,9 +73,9 @@ class CustomJdbcTokenStore(
 
     fun deleteExpiredRefreshTokens(): Int {
         return jdbcTemplate.update(
-            REFRESH_TOKEN_DELETE_EXPIRED_STATEMENT, arrayOf(
-                Instant.now().toEpochMilli()
-            ), intArrayOf(Types.BIGINT)
+            REFRESH_TOKEN_DELETE_EXPIRED_STATEMENT,
+            arrayOf(Instant.now().toEpochMilli()),
+            intArrayOf(Types.BIGINT)
         )
     }
 }
