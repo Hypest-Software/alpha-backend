@@ -3,7 +3,6 @@ package dev.hypestsoftware.hackyeah2020.backend.config
 import dev.hypestsoftware.hackyeah2020.backend.model.Role
 import dev.hypestsoftware.hackyeah2020.backend.model.RoleName
 import dev.hypestsoftware.hackyeah2020.backend.model.User
-import dev.hypestsoftware.hackyeah2020.backend.repository.RoleRepository
 import dev.hypestsoftware.hackyeah2020.backend.repository.UserRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
