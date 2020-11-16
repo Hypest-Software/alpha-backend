@@ -5,15 +5,17 @@ CREATE SEQUENCE hibernate_sequence
     NO MAXVALUE
     CACHE 1;
 
-CREATE TABLE roles (
-    uuid uuid NOT NULL,
-    name character varying(255),
+CREATE TABLE roles
+(
+    uuid    uuid NOT NULL,
+    name    character varying(255),
     user_id uuid NOT NULL
 );
 
-CREATE TABLE users (
-    uuid uuid NOT NULL,
-    enabled boolean,
+CREATE TABLE users
+(
+    uuid     uuid                   NOT NULL,
+    enabled  boolean,
     password character varying(255) NOT NULL,
     username character varying(255) NOT NULL
 );
@@ -28,4 +30,4 @@ ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (uuid);
 
 ALTER TABLE ONLY roles
-    ADD CONSTRAINT fk_role_user FOREIGN KEY (user_id) REFERENCES users(uuid);
+    ADD CONSTRAINT fk_role_user FOREIGN KEY (user_id) REFERENCES users (uuid);

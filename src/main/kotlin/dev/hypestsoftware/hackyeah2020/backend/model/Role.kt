@@ -1,7 +1,10 @@
 package dev.hypestsoftware.hackyeah2020.backend.model
 
-import java.util.*
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.Table
+
 
 @Entity
 @Table(name = "roles")
