@@ -16,7 +16,8 @@ import javax.sql.DataSource
 @Component
 class CustomJwtTokenStore(
     private val customJdbcTokenStore: CustomJdbcTokenStore,
-    jwtAccessTokenConverter: JwtAccessTokenConverter) : JwtTokenStore(jwtAccessTokenConverter) {
+    jwtAccessTokenConverter: JwtAccessTokenConverter
+) : JwtTokenStore(jwtAccessTokenConverter) {
 
     override fun readRefreshToken(tokenValue: String?): OAuth2RefreshToken? {
         return customJdbcTokenStore.readRefreshToken(tokenValue)
@@ -42,10 +43,12 @@ class CustomJwtTokenStore(
 @Component
 class CustomJdbcTokenStore(
     private val jdbcTemplate: JdbcTemplate,
-    dataSource: DataSource) : JdbcTokenStore(dataSource) {
+    dataSource: DataSource
+) : JdbcTokenStore(dataSource) {
 
     companion object {
-        const val REFRESH_TOKEN_INSERT_STATEMENT = "insert into oauth_refresh_token (token_id, token, authentication, user_name, expiration) values (?, ?, ?, ?, ?)"
+        const val REFRESH_TOKEN_INSERT_STATEMENT =
+            "insert into oauth_refresh_token (token_id, token, authentication, user_name, expiration) values (?, ?, ?, ?, ?)"
         const val REFRESH_TOKEN_DELETE_BY_USERNAME_STATEMENT = "delete from oauth_refresh_token where user_name = ?"
         const val REFRESH_TOKEN_DELETE_EXPIRED_STATEMENT = "delete from oauth_refresh_token where expiration < ?"
     }
@@ -53,7 +56,8 @@ class CustomJdbcTokenStore(
     override fun storeRefreshToken(refreshToken: OAuth2RefreshToken, authentication: OAuth2Authentication) {
         val expiringToken = refreshToken as ExpiringOAuth2RefreshToken
 
-        jdbcTemplate.update(REFRESH_TOKEN_INSERT_STATEMENT,
+        jdbcTemplate.update(
+            REFRESH_TOKEN_INSERT_STATEMENT,
             arrayOf(
                 extractTokenKey(refreshToken.value),
                 SqlLobValue(serializeRefreshToken(refreshToken)),
@@ -61,7 +65,8 @@ class CustomJdbcTokenStore(
                 if (authentication.isClientOnly) null else authentication.name,
                 expiringToken.expiration.time
             ),
-            intArrayOf(Types.VARCHAR, Types.BLOB, Types.BLOB, Types.VARCHAR, Types.BIGINT))
+            intArrayOf(Types.VARCHAR, Types.BLOB, Types.BLOB, Types.VARCHAR, Types.BIGINT)
+        )
     }
 
     fun deleteAllRefreshTokensByUsername(username: String): Int {
@@ -71,8 +76,8 @@ class CustomJdbcTokenStore(
     fun deleteExpiredRefreshTokens(): Int {
         return jdbcTemplate.update(
             REFRESH_TOKEN_DELETE_EXPIRED_STATEMENT, arrayOf(
-            Instant.now().toEpochMilli()
-        ),
+                Instant.now().toEpochMilli()
+            ),
             intArrayOf(Types.BIGINT)
         )
     }
