@@ -12,7 +12,6 @@ import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
-import javax.sql.DataSource
 import javax.transaction.Transactional
 
 @Profile("development")
@@ -21,9 +20,6 @@ class DevTestDataInserter : ApplicationRunner {
 
     @Value("\${app.dev.database.insert-test-data}")
     var insertTestData: Boolean = true
-
-    @Autowired
-    lateinit var dataSource: DataSource
 
     @Autowired
     private lateinit var userRepository: UserRepository
