@@ -1,0 +1,10 @@
+.git
+.github
+.gradle
+.idea
+*.iml
+*.iws
+.dev-database
+
+# ignore all *.class files in all folders, including build root
+**/*.class
