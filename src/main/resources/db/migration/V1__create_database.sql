@@ -6,7 +6,7 @@ CREATE SEQUENCE hibernate_sequence
     CACHE 1;
 
 CREATE TABLE roles (
-    uuid bigint NOT NULL,
+    uuid uuid NOT NULL,
     name character varying(255),
     user_id uuid NOT NULL
 );
