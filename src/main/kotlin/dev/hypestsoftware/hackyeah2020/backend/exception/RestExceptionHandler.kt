@@ -127,11 +127,7 @@ abstract class RestExceptionHandler :
                 }
             }
         }
-        sendError(ex, apiError)
-        return ResponseEntity(apiError, apiError.status)
-    }
-
-    private fun sendError(ex: Exception, apiError: ApiError) {
         log.error("Exception during request.", ex)
+        return ResponseEntity(apiError, apiError.status)
     }
 }
