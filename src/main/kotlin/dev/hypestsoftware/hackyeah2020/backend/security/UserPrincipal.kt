@@ -5,7 +5,7 @@ import dev.hypestsoftware.hackyeah2020.backend.model.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import java.util.*
+import java.util.UUID
 
 class UserPrincipal(
     val id: UUID,

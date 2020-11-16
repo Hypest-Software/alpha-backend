@@ -1,4 +1,4 @@
-package dev.hypestsoftware.hackyeah2020.backend.exception;
+package dev.hypestsoftware.hackyeah2020.backend.exception
 
 enum class ApiErrorCode : ErrorCode {
     AU_0000, // generic exception, TODO split into multiple

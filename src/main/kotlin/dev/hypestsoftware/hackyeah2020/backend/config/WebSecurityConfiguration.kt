@@ -18,7 +18,6 @@ class WebSecurityConfiguration : WebSecurityConfigurerAdapter() {
     @Autowired
     private lateinit var customUserDetailsService: UserDetailsService
 
-
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService(customUserDetailsService)
             .passwordEncoder(passwordEncoder())
@@ -34,4 +33,3 @@ class WebSecurityConfiguration : WebSecurityConfigurerAdapter() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder()
     }
 }
-

@@ -14,6 +14,13 @@ class ApiError(
     @JsonIgnore
     val internalErrorCode: ErrorCode
 ) {
-    constructor(ex: RestException) : this(status = ex.status, message = ex.message, code = ex.code.id(), internalErrorCode = ex.code)
-    constructor(status: HttpStatus, message: String?, code: ApiErrorCode): this(status = status, message = message, code = code.id(), internalErrorCode = code)
+    constructor(ex: RestException) : this(
+        status = ex.status,
+        message = ex.message,
+        code = ex.code.id(),
+        internalErrorCode = ex.code
+    )
+
+    constructor(status: HttpStatus, message: String?, code: ApiErrorCode) :
+            this(status = status, message = message, code = code.id(), internalErrorCode = code)
 }

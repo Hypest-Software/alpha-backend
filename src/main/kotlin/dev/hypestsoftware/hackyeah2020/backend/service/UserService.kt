@@ -88,5 +88,4 @@ class UserServiceImpl(
         val user = getUserByEmail(email)
         return user != null
     }
-
 }
