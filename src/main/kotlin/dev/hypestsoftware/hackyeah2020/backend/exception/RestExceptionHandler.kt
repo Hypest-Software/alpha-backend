@@ -123,7 +123,7 @@ abstract class RestExceptionHandler :
                 if (cause != null) {
                     ApiError(cause as RestException)
                 } else {
-                    ApiError(UnknownException(ApiErrorCode.AUTH_0000))
+                    ApiError(UnknownException())
                 }
             }
         }
