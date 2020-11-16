@@ -3,11 +3,9 @@ package dev.hypestsoftware.hackyeah2020.backend.service
 import dev.hypestsoftware.hackyeah2020.backend.exception.ApiErrorCode
 import dev.hypestsoftware.hackyeah2020.backend.exception.InvalidPasswordException
 import dev.hypestsoftware.hackyeah2020.backend.model.Role
-import dev.hypestsoftware.hackyeah2020.backend.model.RoleName
 import dev.hypestsoftware.hackyeah2020.backend.model.User
 import dev.hypestsoftware.hackyeah2020.backend.model.dto.UserCreateDto
 import dev.hypestsoftware.hackyeah2020.backend.model.dto.UserUpdateDto
-import dev.hypestsoftware.hackyeah2020.backend.repository.RoleRepository
 import dev.hypestsoftware.hackyeah2020.backend.repository.UserRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
