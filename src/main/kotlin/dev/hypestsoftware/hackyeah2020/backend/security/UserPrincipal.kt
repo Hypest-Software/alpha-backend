@@ -1,6 +1,5 @@
 package dev.hypestsoftware.hackyeah2020.backend.security
 
-import dev.hypestsoftware.hackyeah2020.backend.model.Role
 import dev.hypestsoftware.hackyeah2020.backend.model.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -44,8 +43,8 @@ class UserPrincipal(
     }
 
     companion object {
-        fun create(user: User, roles: Set<Role>): UserPrincipal {
-            val authorities = roles.map { SimpleGrantedAuthority(it.name.name) }
+        fun create(user: User): UserPrincipal {
+            val authorities = user.roles.map { SimpleGrantedAuthority(it.name.name) }
             return UserPrincipal(user.uuid, user.username, user.password, user.enabled, authorities)
         }
     }

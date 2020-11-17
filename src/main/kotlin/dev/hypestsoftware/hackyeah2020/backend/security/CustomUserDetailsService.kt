@@ -16,8 +16,6 @@ class CustomUserDetailsService(
         val user = userRepository.findActiveByUsername(username)
             ?: throw UsernameNotFoundException("User with username $username not found")
 
-        val roles = user.roles
-
-        return UserPrincipal.create(user, roles)
+        return UserPrincipal.create(user)
     }
 }
