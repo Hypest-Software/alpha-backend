@@ -54,22 +54,18 @@ class UserServiceImpl(
     }
 
     override fun updateUser(uuid: String, userUpdateDto: UserUpdateDto) {
-        val oldUser = userRepository.findByUuid(UUID.fromString(uuid))
+        val oldUser = userRepository.findByUuid(UUID.fromString(uuid)) ?: ApiErrorCode.AUTH_0002.throwException()
 
-        if (oldUser != null) {
-            val newRolesAsListOfString = userUpdateDto.roles
+        val newRolesAsListOfString = userUpdateDto.roles
 
-            val toRemoveRoles = oldUser.roles.filter { !newRolesAsListOfString.contains(it.name) }
-            val toAdd = newRolesAsListOfString.filter { oldUser.roles.find { r -> r.name == it } == null }
-                .map { Role(name = it) }
+        val toRemoveRoles = oldUser.roles.filter { !newRolesAsListOfString.contains(it.name) }
+        val toAdd = newRolesAsListOfString.filter { oldUser.roles.find { r -> r.name == it } == null }
+            .map { Role(name = it) }
 
-            oldUser.roles.removeAll(toRemoveRoles)
-            oldUser.roles.addAll(toAdd)
+        oldUser.roles.removeAll(toRemoveRoles)
+        oldUser.roles.addAll(toAdd)
 
-            userRepository.save(oldUser)
-        } else {
-            ApiErrorCode.AUTH_0002.throwException()
-        }
+        userRepository.save(oldUser)
     }
 
     override fun deleteUser(userToDelete: User) {
