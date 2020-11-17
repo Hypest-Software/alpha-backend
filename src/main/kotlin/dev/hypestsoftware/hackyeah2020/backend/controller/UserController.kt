@@ -22,18 +22,16 @@ class UserController(
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     fun getMe(): CurrentUserDto {
         val uuid = tokenInfo.userUUID ?: ApiErrorCode.AUTH_0003.throwException()
-        var user: User? = null
-        if (ValidationUtils.isStringUUID(uuid)) {
-            user = userService.getUserByUUID(uuid)
+        if (!ValidationUtils.isStringUUID(uuid)) {
+            ApiErrorCode.AUTH_0003.throwException()
         }
-        if (user != null) {
-            return CurrentUserDto(
-                username = user.username,
-                roles = user.roles.map { it.name.name }.toSet(),
-                userUUID = user.uuid.toString()
-            )
-        } else {
-            ApiErrorCode.AUTH_0004.throwException()
-        }
+
+        val user = userService.getUserByUUID(uuid) ?: ApiErrorCode.AUTH_0004.throwException()
+
+        return CurrentUserDto(
+            username = user.username,
+            roles = user.roles.map { it.name.name }.toSet(),
+            userUUID = user.uuid.toString()
+        )
     }
 }
