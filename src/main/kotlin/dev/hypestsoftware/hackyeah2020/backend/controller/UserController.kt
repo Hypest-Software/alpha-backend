@@ -26,7 +26,7 @@ class UserController(
             ApiErrorCode.AUTH_0003.throwException()
         }
 
-        val user = userService.getUserByUUID(uuid) ?: ApiErrorCode.AUTH_0004.throwException()
+        val user: User = userService.getUserByUUID(uuid) ?: ApiErrorCode.AUTH_0004.throwException()
 
         return CurrentUserDto(
             username = user.username,
