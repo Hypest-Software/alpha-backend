@@ -51,6 +51,8 @@ class CustomJdbcTokenStore(
         const val REFRESH_TOKEN_DELETE_EXPIRED_STATEMENT = "delete from oauth_refresh_token where expiration < ?"
     }
 
+    // TODO can this be migrated to JPA (entity and repository)?
+
     override fun storeRefreshToken(refreshToken: OAuth2RefreshToken, authentication: OAuth2Authentication) {
         val expiringToken = refreshToken as ExpiringOAuth2RefreshToken
 
