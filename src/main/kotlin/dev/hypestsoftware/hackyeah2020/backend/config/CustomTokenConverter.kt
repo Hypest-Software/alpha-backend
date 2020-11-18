@@ -20,8 +20,7 @@ class CustomTokenConverter(private val userService: UserService) :
         if (authentication!!.oAuth2Request.clientId == webappClientId) {
             val principal = authentication.principal as UserPrincipal
             val user = userService.getUserByEmail(principal.username)
-
-            if (user != null) {
+            user?.let {
                 val userUUID = user.uuid
 
                 additionalInfo["user_uuid"] = userUUID.toString()
