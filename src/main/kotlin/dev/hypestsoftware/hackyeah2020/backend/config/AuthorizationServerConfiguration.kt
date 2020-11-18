@@ -75,7 +75,7 @@ class AuthorizationServerConfiguration(
 
     @Bean
     fun tokenStore(): TokenStore {
-        val customJdbcTokenStore = CustomJdbcTokenStore(jdbcTemplate, dataSource)
+        val customJdbcTokenStore = CustomJdbcTokenStore(dataSource)
 
         return CustomJwtTokenStore(customJdbcTokenStore, jwtAccessTokenConverter())
     }
