@@ -39,18 +39,6 @@ class AuthorizationServerConfiguration(
     @Value("\${app.oauth.webapp.client-secret}")
     private lateinit var webappClientSecret: String
 
-    @Autowired
-    private lateinit var authenticationManager: AuthenticationManager
-
-    @Autowired
-    private lateinit var customUserDetailsService: UserDetailsService
-
-    @Autowired
-    private lateinit var userService: UserService
-
-    @Autowired
-    private lateinit var passwordEncoder: PasswordEncoder
-
     @Value("\${app.keystore.file}")
     private lateinit var keyStore: Resource
 
@@ -63,12 +51,17 @@ class AuthorizationServerConfiguration(
     @Value("\${app.keystore.keypair.password}")
     private lateinit var keyPairPassword: String
 
-    @Bean
-    fun tokenStore(): TokenStore {
-        val customJdbcTokenStore = CustomJdbcTokenStore(jdbcTemplate, dataSource)
+    @Autowired
+    private lateinit var authenticationManager: AuthenticationManager
 
-        return CustomJwtTokenStore(customJdbcTokenStore, jwtAccessTokenConverter())
-    }
+    @Autowired
+    private lateinit var customUserDetailsService: UserDetailsService
+
+    @Autowired
+    private lateinit var userService: UserService
+
+    @Autowired
+    private lateinit var passwordEncoder: PasswordEncoder
 
     @Bean
     fun tokenServices(clientDetailsService: ClientDetailsService): DefaultTokenServices {
@@ -81,6 +74,13 @@ class AuthorizationServerConfiguration(
     }
 
     @Bean
+    fun tokenStore(): TokenStore {
+        val customJdbcTokenStore = CustomJdbcTokenStore(jdbcTemplate, dataSource)
+
+        return CustomJwtTokenStore(customJdbcTokenStore, jwtAccessTokenConverter())
+    }
+
+    @Bean
     fun jwtAccessTokenConverter(): JwtAccessTokenConverter {
         val keyPair = getKeyPair(getKeyStoreKeyFactory())
 
@@ -88,6 +88,11 @@ class AuthorizationServerConfiguration(
         jwtAccessTokenConverter.setKeyPair(keyPair)
 
         return jwtAccessTokenConverter
+    }
+
+    @Bean
+    fun tokenEnhancer(): TokenEnhancer {
+        return CustomTokenConverter(userService)
     }
 
     override fun configure(clients: ClientDetailsServiceConfigurer) {
@@ -99,19 +104,6 @@ class AuthorizationServerConfiguration(
             .authorities(*RoleName.values().map { it.name }.toTypedArray())
             .accessTokenValiditySeconds(60 * 15) // 15 minutes
             .refreshTokenValiditySeconds(24 * 60 * 60) // 1 day
-    }
-
-    @Bean
-    fun tokenEnhancer(): TokenEnhancer {
-        return CustomTokenConverter(userService)
-    }
-
-    fun getKeyPair(keyStoreKeyFactory: KeyStoreKeyFactory): KeyPair {
-        return keyStoreKeyFactory.getKeyPair(keyPairAlias, keyPairPassword.toCharArray())
-    }
-
-    fun getKeyStoreKeyFactory(): KeyStoreKeyFactory {
-        return KeyStoreKeyFactory(keyStore, keyStorePassword.toCharArray())
     }
 
     override fun configure(endpoints: AuthorizationServerEndpointsConfigurer) {
@@ -130,5 +122,13 @@ class AuthorizationServerConfiguration(
         oauthServer
             .passwordEncoder(passwordEncoder)
             .checkTokenAccess("isAuthenticated()")
+    }
+
+    private fun getKeyPair(keyStoreKeyFactory: KeyStoreKeyFactory): KeyPair {
+        return keyStoreKeyFactory.getKeyPair(keyPairAlias, keyPairPassword.toCharArray())
+    }
+
+    fun getKeyStoreKeyFactory(): KeyStoreKeyFactory {
+        return KeyStoreKeyFactory(keyStore, keyStorePassword.toCharArray())
     }
 }
