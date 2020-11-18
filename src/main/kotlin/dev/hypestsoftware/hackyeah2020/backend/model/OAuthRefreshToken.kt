@@ -1,7 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.model
 
 import org.hibernate.annotations.Type
-import java.sql.Blob
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -15,11 +14,11 @@ class OAuthRefreshToken(
     val token_id: String,
 
     @Column(name = "token", nullable = false)
-    @Type(type="org.hibernate.type.BinaryType")
+    @Type(type = "org.hibernate.type.BinaryType")
     var token: ByteArray,
 
     @Column(name = "authentication", nullable = false)
-    @Type(type="org.hibernate.type.BinaryType")
+    @Type(type = "org.hibernate.type.BinaryType")
     var authentication: ByteArray,
 
     @Column(name = "user_name")
