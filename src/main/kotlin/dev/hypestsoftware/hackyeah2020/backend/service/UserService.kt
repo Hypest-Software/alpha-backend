@@ -32,8 +32,10 @@ class UserServiceImpl(
     @Throws(InvalidPasswordException::class)
     override fun changePassword(username: String, newPassword: String, oldPassword: String) {
         val loggedInUser = getUserByEmail(username)!!
+
         if (passwordEncoder.matches(oldPassword, loggedInUser.password)) {
             loggedInUser.password = passwordEncoder.encode(newPassword)
+
             userRepository.save(loggedInUser)
         } else {
             ApiErrorCode.AUTH_0001.throwException()
