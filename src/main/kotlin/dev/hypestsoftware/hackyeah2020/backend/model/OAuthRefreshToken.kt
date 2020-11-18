@@ -16,14 +16,14 @@ class OAuthRefreshToken(
 
     @Column(name = "token", nullable = false)
     @Type(type="org.hibernate.type.BinaryType")
-    var token: Blob,
+    var token: ByteArray,
 
     @Column(name = "authentication", nullable = false)
     @Type(type="org.hibernate.type.BinaryType")
-    var authentication: Blob,
+    var authentication: ByteArray,
 
     @Column(name = "user_name")
-    var username: String,
+    var username: String?,
 
     @Column(name = "expiration", nullable = false)
     var expiration: Long,
