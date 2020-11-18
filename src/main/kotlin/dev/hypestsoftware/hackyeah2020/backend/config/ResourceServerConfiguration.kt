@@ -1,6 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.config
 
-import dev.hypestsoftware.hackyeah2020.backend.exception.RestExceptionHandler
+import dev.hypestsoftware.hackyeah2020.backend.exception.base.RestExceptionHandler
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.ResponseEntity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity

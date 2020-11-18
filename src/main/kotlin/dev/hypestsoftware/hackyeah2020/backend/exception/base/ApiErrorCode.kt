@@ -1,5 +1,6 @@
-package dev.hypestsoftware.hackyeah2020.backend.exception
+package dev.hypestsoftware.hackyeah2020.backend.exception.base
 
+import dev.hypestsoftware.hackyeah2020.backend.exception.rest.AuthException
 import org.springframework.http.HttpStatus
 
 enum class ApiErrorCode(private val exception: RestException) : ErrorCode {

@@ -1,4 +1,4 @@
-package dev.hypestsoftware.hackyeah2020.backend.exception
+package dev.hypestsoftware.hackyeah2020.backend.exception.base
 
 import org.springframework.http.HttpStatus
 

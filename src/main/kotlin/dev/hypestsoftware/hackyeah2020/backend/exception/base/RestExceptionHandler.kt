@@ -1,5 +1,6 @@
-package dev.hypestsoftware.hackyeah2020.backend.exception
+package dev.hypestsoftware.hackyeah2020.backend.exception.base
 
+import dev.hypestsoftware.hackyeah2020.backend.exception.rest.UnknownException
 import org.slf4j.LoggerFactory
 import org.springframework.beans.TypeMismatchException
 import org.springframework.http.HttpHeaders

@@ -1,7 +1,7 @@
 package dev.hypestsoftware.hackyeah2020.backend.service
 
-import dev.hypestsoftware.hackyeah2020.backend.exception.ApiErrorCode
-import dev.hypestsoftware.hackyeah2020.backend.exception.InvalidPasswordException
+import dev.hypestsoftware.hackyeah2020.backend.exception.base.ApiErrorCode
+import dev.hypestsoftware.hackyeah2020.backend.exception.rest.InvalidPasswordException
 import dev.hypestsoftware.hackyeah2020.backend.model.Role
 import dev.hypestsoftware.hackyeah2020.backend.model.User
 import dev.hypestsoftware.hackyeah2020.backend.model.dto.UserCreateDto

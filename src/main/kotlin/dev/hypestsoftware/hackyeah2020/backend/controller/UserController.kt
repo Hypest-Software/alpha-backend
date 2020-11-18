@@ -1,6 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.controller
 
-import dev.hypestsoftware.hackyeah2020.backend.exception.ApiErrorCode
+import dev.hypestsoftware.hackyeah2020.backend.exception.base.ApiErrorCode
 import dev.hypestsoftware.hackyeah2020.backend.model.User
 import dev.hypestsoftware.hackyeah2020.backend.model.dto.CurrentUserDto
 import dev.hypestsoftware.hackyeah2020.backend.service.UserService

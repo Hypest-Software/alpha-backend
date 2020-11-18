@@ -1,4 +1,4 @@
-package dev.hypestsoftware.hackyeah2020.backend.exception
+package dev.hypestsoftware.hackyeah2020.backend.exception.base
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnore
