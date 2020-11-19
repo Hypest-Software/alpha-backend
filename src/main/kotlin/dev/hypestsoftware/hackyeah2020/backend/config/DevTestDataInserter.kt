@@ -3,7 +3,6 @@ package dev.hypestsoftware.hackyeah2020.backend.config
 import dev.hypestsoftware.hackyeah2020.backend.model.Role
 import dev.hypestsoftware.hackyeah2020.backend.model.RoleName
 import dev.hypestsoftware.hackyeah2020.backend.model.User
-import dev.hypestsoftware.hackyeah2020.backend.repository.RoleRepository
 import dev.hypestsoftware.hackyeah2020.backend.repository.UserRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,28 +23,31 @@ class DevTestDataInserter : ApplicationRunner {
     @Autowired
     private lateinit var userRepository: UserRepository
 
-    @Autowired
-    private lateinit var roleRepository: RoleRepository
-
     private val logger = LoggerFactory.getLogger(DevTestDataInserter::class.java)
 
     @Transactional
     override fun run(args: ApplicationArguments?) {
-        if (insertTestData && !userRepository.findAll().any()) {
+        if (shouldInsertTestUser()) {
             logger.info("Inserting development test user data")
-            // The encrypted password is `pass`
-            val user = User(
-                username = "user",
-                password = "{bcrypt}\$2a\$10\$cyf5NfobcruKQ8XGjUJkEegr9ZWFqaea6vjpXWEaSqTa2xL9wjgQC",
-                enabled = true
-            )
+            val user = createTestUser()
 
-            val role = Role(name = RoleName.ROLE_ADMIN)
-
-            user.roles = mutableSetOf(role)
-            userRepository.save(user) // saving role is redundant because of cascade all set on user entity
+            userRepository.save(user)
         } else {
             logger.info("Skipped inserting development test data because data already exists")
         }
+    }
+
+    private fun shouldInsertTestUser(): Boolean {
+        return insertTestData && !userRepository.findAll().any()
+    }
+
+    private fun createTestUser(): User {
+        // The encrypted password is `pass`
+        return User(
+            username = "user",
+            password = "{bcrypt}\$2a\$10\$cyf5NfobcruKQ8XGjUJkEegr9ZWFqaea6vjpXWEaSqTa2xL9wjgQC",
+            enabled = true,
+            roles = mutableSetOf(Role(name = RoleName.ROLE_ADMIN))
+        )
     }
 }
