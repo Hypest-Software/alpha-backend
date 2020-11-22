@@ -2,7 +2,6 @@ package dev.hypestsoftware.hackyeah2020.backend.config
 
 import dev.hypestsoftware.hackyeah2020.backend.model.OAuthRefreshToken
 import dev.hypestsoftware.hackyeah2020.backend.repository.OAuthRefreshTokenRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.oauth2.common.ExpiringOAuth2RefreshToken
 import org.springframework.security.oauth2.common.OAuth2RefreshToken
 import org.springframework.security.oauth2.provider.OAuth2Authentication
