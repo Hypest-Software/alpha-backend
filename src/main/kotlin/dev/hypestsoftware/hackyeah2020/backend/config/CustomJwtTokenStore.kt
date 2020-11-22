@@ -42,12 +42,9 @@ class CustomJwtTokenStore(
 
 @Component
 class CustomJdbcTokenStore(
-
+    private val oAuthRefreshTokenRepository: OAuthRefreshTokenRepository,
     dataSource: DataSource
 ) : JdbcTokenStore(dataSource) {
-
-    @Autowired
-    private lateinit var oAuthRefreshTokenRepository: OAuthRefreshTokenRepository
 
     override fun storeRefreshToken(refreshToken: OAuth2RefreshToken, authentication: OAuth2Authentication) {
         val expiringToken = refreshToken as ExpiringOAuth2RefreshToken

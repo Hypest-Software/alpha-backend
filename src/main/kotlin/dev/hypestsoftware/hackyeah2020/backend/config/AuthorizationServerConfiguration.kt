@@ -1,6 +1,7 @@
 package dev.hypestsoftware.hackyeah2020.backend.config
 
 import dev.hypestsoftware.hackyeah2020.backend.model.RoleName
+import dev.hypestsoftware.hackyeah2020.backend.repository.OAuthRefreshTokenRepository
 import dev.hypestsoftware.hackyeah2020.backend.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -63,6 +64,9 @@ class AuthorizationServerConfiguration(
     @Autowired
     private lateinit var passwordEncoder: PasswordEncoder
 
+    @Autowired
+    private lateinit var oAuthRefreshTokenRepository: OAuthRefreshTokenRepository
+
     @Bean
     fun tokenServices(clientDetailsService: ClientDetailsService): DefaultTokenServices {
         val tokenServices = DefaultTokenServices()
@@ -75,7 +79,7 @@ class AuthorizationServerConfiguration(
 
     @Bean
     fun tokenStore(): TokenStore {
-        val customJdbcTokenStore = CustomJdbcTokenStore(dataSource)
+        val customJdbcTokenStore = CustomJdbcTokenStore(oAuthRefreshTokenRepository, dataSource)
 
         return CustomJwtTokenStore(customJdbcTokenStore, jwtAccessTokenConverter())
     }
