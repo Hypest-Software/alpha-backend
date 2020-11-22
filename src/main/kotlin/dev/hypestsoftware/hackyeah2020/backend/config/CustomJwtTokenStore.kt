@@ -2,7 +2,6 @@ package dev.hypestsoftware.hackyeah2020.backend.config
 
 import dev.hypestsoftware.hackyeah2020.backend.model.OAuthRefreshToken
 import dev.hypestsoftware.hackyeah2020.backend.repository.OAuthRefreshTokenRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.oauth2.common.ExpiringOAuth2RefreshToken
 import org.springframework.security.oauth2.common.OAuth2RefreshToken
 import org.springframework.security.oauth2.provider.OAuth2Authentication
@@ -42,12 +41,9 @@ class CustomJwtTokenStore(
 
 @Component
 class CustomJdbcTokenStore(
-
+    private val oAuthRefreshTokenRepository: OAuthRefreshTokenRepository,
     dataSource: DataSource
 ) : JdbcTokenStore(dataSource) {
-
-    @Autowired
-    private lateinit var oAuthRefreshTokenRepository: OAuthRefreshTokenRepository
 
     override fun storeRefreshToken(refreshToken: OAuth2RefreshToken, authentication: OAuth2Authentication) {
         val expiringToken = refreshToken as ExpiringOAuth2RefreshToken
