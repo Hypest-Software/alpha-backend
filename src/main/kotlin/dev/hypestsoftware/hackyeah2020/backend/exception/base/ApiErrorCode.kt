@@ -8,7 +8,8 @@ enum class ApiErrorCode(private val exception: RestException) : ErrorCode {
     AUTH_0001(AuthException("Wrong password", HttpStatus.BAD_REQUEST)),
     AUTH_0002(RestException("Error while updating user", HttpStatus.INTERNAL_SERVER_ERROR)),
     AUTH_0003(AuthException("Wrong JWT provded by the client", HttpStatus.BAD_REQUEST)),
-    AUTH_0004(AuthException("Error while retrieving logged in user", HttpStatus.INTERNAL_SERVER_ERROR))
+    AUTH_0004(AuthException("Error while retrieving logged in user", HttpStatus.INTERNAL_SERVER_ERROR)),
+    REPORT_ERR_0001(RestException("Report with given uuid does not exist", HttpStatus.NOT_FOUND))
     ;
 
     init {

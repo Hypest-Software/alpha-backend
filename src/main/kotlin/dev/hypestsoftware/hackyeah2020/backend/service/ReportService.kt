@@ -1,5 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.service
 
+import dev.hypestsoftware.hackyeah2020.backend.exception.base.ApiErrorCode
 import dev.hypestsoftware.hackyeah2020.backend.model.Location
 import dev.hypestsoftware.hackyeah2020.backend.model.Report
 import dev.hypestsoftware.hackyeah2020.backend.model.ReportStatus
@@ -32,8 +33,10 @@ class ReportServiceImpl(private val reportRepository: ReportRepository) : Report
     }
 
     override fun updateStatus(uuid: UUID, status: ReportStatus) {
+        val report = reportRepository.findByUuid(uuid) ?: ApiErrorCode.REPORT_ERR_0001.throwException()
 
-
+        report.status = status.toString()
+        reportRepository.save(report)
     }
 
 }

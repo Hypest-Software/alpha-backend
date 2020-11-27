@@ -27,11 +27,11 @@ class Report(
     val description: String,
 
     @Column(nullable = false)
-    val imageUrl: String = "",
+    var imageUrl: String = "",
 
     @OneToOne(optional = false, cascade = [CascadeType.ALL])
     val location: Location,
 
     @Column(nullable = false)
-    val status: String
+    var status: String
 )
