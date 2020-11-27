@@ -23,4 +23,7 @@ class Report(
         @Column(nullable = false)
         val imageUrl: String,
 
-        )
+        @OneToOne(optional = false)
+        val location: Location
+
+)
