@@ -15,7 +15,7 @@ class Location(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false)
-    val id: Long,
+    val id: Long = 0,
 
     @Column(nullable = false)
     val latitude: BigDecimal,

@@ -1,4 +1,4 @@
-CREATE TYPE report_status AS ENUM ('new','pending','resolved','closed');
+CREATE TYPE report_status AS ENUM ('NEW','PENDING','RESOLVED','CLOSED');
 
 CREATE TABLE reports
 (

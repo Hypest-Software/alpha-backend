@@ -3,6 +3,7 @@ package dev.hypestsoftware.hackyeah2020.backend.model
 import org.springframework.data.annotation.CreatedDate
 import java.sql.Timestamp
 import java.util.UUID
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -20,15 +21,15 @@ class Report(
 
     @CreatedDate
     @Column(nullable = false)
-    val createdAt: Timestamp,
+    val createdAt: Timestamp = Timestamp(0),
 
     @Column(nullable = false)
     val description: String,
 
     @Column(nullable = false)
-    val imageUrl: String,
+    val imageUrl: String = "",
 
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = [CascadeType.ALL])
     val location: Location,
 
     @Column(nullable = false)
