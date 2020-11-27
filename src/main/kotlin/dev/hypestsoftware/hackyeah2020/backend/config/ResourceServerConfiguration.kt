@@ -2,6 +2,7 @@ package dev.hypestsoftware.hackyeah2020.backend.config
 
 import dev.hypestsoftware.hackyeah2020.backend.exception.base.RestExceptionHandler
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.http.ResponseEntity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -45,6 +46,7 @@ class ResourceServerConfiguration(
             .and()
             .authorizeRequests()
             .antMatchers("/status").permitAll()
+            .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
             .anyRequest().authenticated()
     }
 }
