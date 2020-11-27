@@ -19,6 +19,7 @@ class CorsConfiguration {
         val config = CorsConfiguration()
         config.allowCredentials = true
         config.addAllowedOrigin("http://localhost:4200")
+        config.addAllowedOrigin("https://hackyeah2020-alpha-backend.herokuapp.com")
         config.addAllowedHeader("*")
         config.addAllowedMethod("*")
         source.registerCorsConfiguration("/**", config)
