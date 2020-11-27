@@ -12,6 +12,7 @@ import java.util.UUID
 interface ReportService {
     fun createNewReport(report: ReportCreateDto): UUID
     fun updateStatus(uuid: UUID, status: ReportStatus)
+    fun getReportByUuid(uuid: UUID): Report?
 
 }
 
@@ -37,6 +38,10 @@ class ReportServiceImpl(private val reportRepository: ReportRepository) : Report
 
         report.status = status.toString()
         reportRepository.save(report)
+    }
+
+    override fun getReportByUuid(uuid: UUID): Report? {
+        return reportRepository.findByUuid(uuid)
     }
 
 }
