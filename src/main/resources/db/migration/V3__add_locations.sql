@@ -1,6 +1,6 @@
 CREATE TABLE locations
 (
-    id        integer PRIMARY KEY,
+    id        bigint PRIMARY KEY,
     latitude  numeric(24, 16) NOT NULL,
     longitude numeric(24, 16) NOT NULL
 );

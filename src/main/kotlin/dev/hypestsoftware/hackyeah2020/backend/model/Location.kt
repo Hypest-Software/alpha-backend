@@ -1,5 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.model
 
+import java.math.BigDecimal
 import java.util.*
 import javax.persistence.*
 
@@ -13,8 +14,8 @@ class Location(
         val id: Long,
 
         @Column(nullable = false)
-        val latitude: Double,
+        val latitude: BigDecimal,
 
         @Column(nullable = false)
-        val longitude: Double
+        val longitude: BigDecimal
 )

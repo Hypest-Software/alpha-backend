@@ -24,6 +24,8 @@ class Report(
         val imageUrl: String,
 
         @OneToOne(optional = false)
-        val location: Location
+        val location: Location,
 
+        @Column(nullable = false)
+        val status: String
 )
