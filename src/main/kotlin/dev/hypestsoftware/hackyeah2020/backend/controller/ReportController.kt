@@ -24,7 +24,6 @@ class ReportController(private val reportService: ReportService) {
     }
 
     @GetMapping("/{uuid}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     fun getReportByUuid(@PathVariable uuid: UUID): ResponseEntity<Report> {
         return ResponseEntity.ok(reportService.getReportByUuid(uuid))
     }
