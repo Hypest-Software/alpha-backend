@@ -19,7 +19,7 @@ interface ReportService {
 class ReportServiceImpl(private val reportRepository: ReportRepository) : ReportService {
 
     override fun createNewReport(report: ReportCreateDto): Report {
-        //TODO run image processing
+        // TODO run image processing
         val (latitude, longitude) = report.location
 
         return reportRepository.save(
