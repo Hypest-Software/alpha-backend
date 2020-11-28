@@ -5,7 +5,6 @@ import dev.hypestsoftware.hackyeah2020.backend.model.dto.ReportCreateDto
 import dev.hypestsoftware.hackyeah2020.backend.service.ReportService
 import dev.hypestsoftware.hackyeah2020.backend.utils.PUBLIC_API_ENDPOINT_V1
 import org.springframework.http.ResponseEntity
-import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
