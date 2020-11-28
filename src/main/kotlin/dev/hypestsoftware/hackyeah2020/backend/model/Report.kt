@@ -1,5 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.model
 
+import dev.hypestsoftware.hackyeah2020.backend.model.dto.ReportDto
 import org.hibernate.annotations.Type
 import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
@@ -32,7 +33,7 @@ class Report(
     val description: String,
 
     @Lob
-    @Type(type="org.hibernate.type.BinaryType")
+    @Type(type = "org.hibernate.type.BinaryType")
     @Column(nullable = false)
     var image: ByteArray,
 
@@ -42,4 +43,15 @@ class Report(
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     var status: ReportStatus
-)
+) {
+    fun toReportDto(): ReportDto {
+        return ReportDto(
+            uuid,
+            createdAt,
+            description,
+            String(image),
+            location.toLocationDto(),
+            status.toString()
+        )
+    }
+}

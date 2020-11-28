@@ -11,8 +11,8 @@ data class ReportCreateDto(
     fun toEntity() = Report(
         description = description,
         location = location.toEntity(),
+        image = image.toByteArray(),
         status = ReportStatus.NEW,
     )
-
 }
 

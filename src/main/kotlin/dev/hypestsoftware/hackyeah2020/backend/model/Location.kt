@@ -1,5 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.model
 
+import dev.hypestsoftware.hackyeah2020.backend.model.dto.LocationDto
 import java.math.BigDecimal
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -22,4 +23,8 @@ class Location(
 
     @Column(nullable = false)
     val longitude: BigDecimal
-)
+) {
+    fun toLocationDto(): LocationDto {
+        return LocationDto(latitude, longitude)
+    }
+}
