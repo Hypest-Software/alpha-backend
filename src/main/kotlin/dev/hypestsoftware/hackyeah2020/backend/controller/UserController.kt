@@ -43,7 +43,7 @@ class UserController(
     }
 
     @GetMapping("/{uuid}")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     fun getUserByUuid(@PathVariable uuid: UUID): ResponseEntity<CurrentUserDto> {
         val user = userService.getUserByUUID(uuid) ?: ApiErrorCode.AUTH_0004.throwException()
 
