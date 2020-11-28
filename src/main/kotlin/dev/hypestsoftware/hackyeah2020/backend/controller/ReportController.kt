@@ -1,7 +1,8 @@
 package dev.hypestsoftware.hackyeah2020.backend.controller
 
-import dev.hypestsoftware.hackyeah2020.backend.model.Report
+import dev.hypestsoftware.hackyeah2020.backend.model.dto.LocationDto
 import dev.hypestsoftware.hackyeah2020.backend.model.dto.ReportCreateDto
+import dev.hypestsoftware.hackyeah2020.backend.model.dto.ReportDto
 import dev.hypestsoftware.hackyeah2020.backend.service.ReportService
 import dev.hypestsoftware.hackyeah2020.backend.utils.PUBLIC_API_ENDPOINT_V1
 import org.springframework.http.ResponseEntity
@@ -18,12 +19,31 @@ import java.util.UUID
 class ReportController(private val reportService: ReportService) {
 
     @PostMapping
-    fun createReport(@RequestBody report: ReportCreateDto): ResponseEntity<Report> {
-        return ResponseEntity.ok(reportService.createNewReport(report))
+    fun createReport(@RequestBody report: ReportCreateDto): ResponseEntity<ReportDto> {
+        val createdReport = reportService.createNewReport(report)
+
+        return ResponseEntity.ok(
+            ReportDto(
+                description = createdReport.description,
+                location = LocationDto(
+                    latitude = createdReport.location.latitude,
+                    longitude = createdReport.location.longitude
+                ),
+                image = String(createdReport.image)
+            )
+        )
     }
 
     @GetMapping("/{uuid}")
-    fun getReportByUuid(@PathVariable uuid: UUID): ResponseEntity<Report> {
-        return ResponseEntity.ok(reportService.getReportByUuid(uuid))
+    fun getReportByUuid(@PathVariable uuid: UUID): ResponseEntity<ReportDto> {
+        val report = reportService.getReportByUuid(uuid)
+
+        return ResponseEntity.ok(
+            ReportDto(
+                description = report.description,
+                location = LocationDto(latitude = report.location.latitude, longitude = report.location.longitude),
+                image = String(report.image)
+            )
+        )
     }
 }

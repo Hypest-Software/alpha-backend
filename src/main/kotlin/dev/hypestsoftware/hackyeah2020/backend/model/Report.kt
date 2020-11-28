@@ -1,5 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.model
 
+import org.hibernate.annotations.Type
 import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
 import java.util.UUID
@@ -11,6 +12,7 @@ import javax.persistence.Enumerated
 import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.Lob
 import javax.persistence.OneToOne
 import javax.persistence.Table
 
@@ -29,8 +31,10 @@ class Report(
     @Column(nullable = false)
     val description: String,
 
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
     @Column(nullable = false)
-    var imageUrl: String = "",
+    var image: ByteArray,
 
     @OneToOne(optional = false, cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     val location: Location,

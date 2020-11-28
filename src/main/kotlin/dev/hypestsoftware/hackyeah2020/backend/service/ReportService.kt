@@ -26,6 +26,7 @@ class ReportServiceImpl(private val reportRepository: ReportRepository) : Report
             Report(
                 description = report.description,
                 location = Location(latitude = latitude, longitude = longitude),
+                image = report.image.toByteArray(),
                 status = ReportStatus.NEW,
             )
         )
