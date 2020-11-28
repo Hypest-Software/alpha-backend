@@ -16,7 +16,7 @@ interface UserService {
     fun updateUser(uuid: String, userUpdateDto: UserUpdateDto)
     fun deleteUser(userToDelete: User)
     fun getUserByEmail(email: String): User?
-    fun getUserByUUID(uuid: String): User?
+    fun getUserByUUID(uuid: UUID): User?
     fun userWithGivenEmailExists(email: String): Boolean
 
     @Throws(InvalidPasswordException::class)
@@ -78,8 +78,8 @@ class UserServiceImpl(
         return userRepository.findByUsername(email)
     }
 
-    override fun getUserByUUID(uuid: String): User? {
-        return userRepository.findByUuid(UUID.fromString(uuid))
+    override fun getUserByUUID(uuid: UUID): User? {
+        return userRepository.findByUuid(uuid)
     }
 
     override fun userWithGivenEmailExists(email: String): Boolean {
