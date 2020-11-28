@@ -1,5 +1,3 @@
-CREATE TYPE report_status AS ENUM ('NEW','PENDING','RESOLVED','CLOSED');
-
 CREATE TABLE reports
 (
     uuid        uuid PRIMARY KEY,
@@ -7,7 +5,7 @@ CREATE TABLE reports
     description TEXT          NOT NULL,
     image_url   TEXT          NOT NULL,
 
-    status      report_status NOT NULL,
+    status      TEXT NOT NULL,
 
     location_id bigint references locations
 );
