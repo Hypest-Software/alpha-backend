@@ -6,6 +6,8 @@ import java.util.UUID
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.OneToOne
@@ -32,6 +34,7 @@ class Report(
     @OneToOne(optional = false, cascade = [CascadeType.ALL])
     val location: Location,
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var status: String
+    var status: ReportStatus
 )
