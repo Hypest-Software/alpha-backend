@@ -7,35 +7,24 @@ CREATE SEQUENCE hibernate_sequence
 
 CREATE TABLE roles
 (
-    uuid uuid NOT NULL,
-    name character varying(255)
+    uuid uuid PRIMARY KEY,
+    name character varying(255) NOT NULL
 );
 
 CREATE TABLE users
 (
-    uuid     uuid                   NOT NULL,
-    enabled  boolean,
+    uuid     uuid PRIMARY KEY,
+    enabled  boolean                NOT NULL,
     password character varying(255) NOT NULL,
     username character varying(255) NOT NULL
 );
 
 CREATE TABLE user_role
 (
-    user_uuid uuid NOT NULL,
-    role_uuid uuid NOT NULL
+    user_uuid uuid NOT NULL references users,
+    role_uuid uuid NOT NULL references roles
 );
 
-ALTER TABLE ONLY roles
-    ADD CONSTRAINT roles_pkey PRIMARY KEY (uuid);
-
-ALTER TABLE ONLY users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (uuid);
-
-ALTER TABLE ONLY users
-    ADD CONSTRAINT users_username UNIQUE (username);
-
-ALTER TABLE ONLY user_role
-    ADD CONSTRAINT fk_user_role_user FOREIGN KEY (user_uuid) REFERENCES users (uuid);
-
-ALTER TABLE ONLY user_role
-    ADD CONSTRAINT fk_user_role_role FOREIGN KEY (role_uuid) REFERENCES roles (uuid);
+CREATE INDEX users_uuid ON users (uuid);
+CREATE UNIQUE INDEX users_usernames ON users (username);
+CREATE INDEX users_enabled ON users (enabled);
