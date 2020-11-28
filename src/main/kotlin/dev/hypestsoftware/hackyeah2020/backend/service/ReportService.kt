@@ -13,7 +13,6 @@ interface ReportService {
     fun createNewReport(report: ReportCreateDto): UUID
     fun updateStatus(uuid: UUID, status: ReportStatus)
     fun getReportByUuid(uuid: UUID): Report
-
 }
 
 @Service
