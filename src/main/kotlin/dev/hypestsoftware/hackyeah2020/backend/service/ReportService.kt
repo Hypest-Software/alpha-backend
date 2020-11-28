@@ -26,7 +26,7 @@ class ReportServiceImpl(private val reportRepository: ReportRepository) : Report
             Report(
                 description = report.description,
                 location = Location(latitude = latitude, longitude = longitude),
-                status = ReportStatus.NEW.toString(),
+                status = ReportStatus.NEW,
             )
         )
     }
@@ -34,7 +34,7 @@ class ReportServiceImpl(private val reportRepository: ReportRepository) : Report
     override fun updateStatus(uuid: UUID, status: ReportStatus) {
         val report = reportRepository.findByUuid(uuid) ?: ApiErrorCode.REPORT_ERR_0001.throwException()
 
-        report.status = status.toString()
+        report.status = status
         reportRepository.save(report)
     }
 
