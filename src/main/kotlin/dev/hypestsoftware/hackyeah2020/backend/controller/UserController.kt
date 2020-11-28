@@ -3,6 +3,7 @@ package dev.hypestsoftware.hackyeah2020.backend.controller
 import dev.hypestsoftware.hackyeah2020.backend.exception.base.ApiErrorCode
 import dev.hypestsoftware.hackyeah2020.backend.model.User
 import dev.hypestsoftware.hackyeah2020.backend.model.dto.CurrentUserDto
+import dev.hypestsoftware.hackyeah2020.backend.model.dto.UserRegisterDto
 import dev.hypestsoftware.hackyeah2020.backend.service.UserService
 import dev.hypestsoftware.hackyeah2020.backend.utils.PUBLIC_API_ENDPOINT_V1
 import dev.hypestsoftware.hackyeah2020.backend.utils.TokenInfo
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
@@ -54,5 +56,11 @@ class UserController(
                 userUUID = user.uuid.toString()
             )
         )
+    }
+
+    @GetMapping("/register")
+    fun registerUser(@RequestBody user: UserRegisterDto): ResponseEntity<UUID> {
+        val uuid = userService.createNewUser(user.toUserCreateDto())
+        return ResponseEntity.ok(uuid)
     }
 }
