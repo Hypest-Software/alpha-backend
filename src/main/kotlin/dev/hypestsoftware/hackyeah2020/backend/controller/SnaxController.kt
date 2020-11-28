@@ -13,6 +13,6 @@ import org.springframework.web.servlet.ModelAndView
 class SnaxController {
     @GetMapping("/iamnot")
     fun getInfo(): ModelAndView {
-        return ModelAndView("redirect" + "https://youtu.be/hqRNro3gif8")
+        return ModelAndView("redirect:" + "https://youtu.be/hqRNro3gif8")
     }
 }
