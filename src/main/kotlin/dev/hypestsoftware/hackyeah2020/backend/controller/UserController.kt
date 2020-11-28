@@ -46,6 +46,7 @@ class UserController(
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
     fun getUserByUuid(@PathVariable uuid: UUID): ResponseEntity<CurrentUserDto> {
         val user = userService.getUserByUUID(uuid) ?: ApiErrorCode.AUTH_0004.throwException()
+
         return ResponseEntity.ok(
             CurrentUserDto(
                 username = user.username,

@@ -1,5 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -23,5 +24,6 @@ class Role(
     var name: RoleName,
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
+    @JsonIgnore
     var users: MutableSet<User> = mutableSetOf()
 )
