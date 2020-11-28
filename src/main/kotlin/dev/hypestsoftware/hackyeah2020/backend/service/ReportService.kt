@@ -12,7 +12,7 @@ import java.util.UUID
 interface ReportService {
     fun createNewReport(report: ReportCreateDto): UUID
     fun updateStatus(uuid: UUID, status: ReportStatus)
-    fun getReportByUuid(uuid: UUID): Report?
+    fun getReportByUuid(uuid: UUID): Report
 
 }
 
@@ -40,8 +40,8 @@ class ReportServiceImpl(private val reportRepository: ReportRepository) : Report
         reportRepository.save(report)
     }
 
-    override fun getReportByUuid(uuid: UUID): Report? {
-        return reportRepository.findByUuid(uuid)
+    override fun getReportByUuid(uuid: UUID): Report {
+        return reportRepository.findByUuid(uuid) ?: ApiErrorCode.REPORT_ERR_0001.throwException()
     }
 
 }
