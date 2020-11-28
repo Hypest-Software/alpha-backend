@@ -1,7 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.service
 
 import dev.hypestsoftware.hackyeah2020.backend.exception.base.ApiErrorCode
-import dev.hypestsoftware.hackyeah2020.backend.model.Location
 import dev.hypestsoftware.hackyeah2020.backend.model.Report
 import dev.hypestsoftware.hackyeah2020.backend.model.ReportStatus
 import dev.hypestsoftware.hackyeah2020.backend.model.dto.ReportCreateDto
