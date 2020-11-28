@@ -24,6 +24,13 @@ class ReportController(private val reportService: ReportService) {
         return ResponseEntity.ok(createdReport.toReportDto())
     }
 
+    @GetMapping
+    fun getAllReports(): ResponseEntity<List<ReportDto>> {
+        val reports = reportService.getAllReports()
+
+        return ResponseEntity.ok(reports.map { it.toReportDto() })
+    }
+
     @GetMapping("/{uuid}")
     fun getReportByUuid(@PathVariable uuid: UUID): ResponseEntity<ReportDto> {
         val report = reportService.getReportByUuid(uuid)

@@ -12,6 +12,7 @@ interface ReportService {
     fun createNewReport(report: ReportCreateDto): Report
     fun updateStatus(uuid: UUID, status: ReportStatus)
     fun getReportByUuid(uuid: UUID): Report
+    fun getAllReports(): List<Report>
 }
 
 @Service
@@ -31,5 +32,9 @@ class ReportServiceImpl(private val reportRepository: ReportRepository) : Report
 
     override fun getReportByUuid(uuid: UUID): Report {
         return reportRepository.findByUuid(uuid) ?: ApiErrorCode.REPORT_ERR_0001.throwException()
+    }
+
+    override fun getAllReports(): List<Report> {
+        return reportRepository.findAll()
     }
 }

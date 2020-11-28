@@ -10,5 +10,6 @@ class ReportDto(
     val description: String,
     val image: String,
     val location: LocationDto,
-    val status: String
+    val status: String,
+    val boarStatus: String
 )
