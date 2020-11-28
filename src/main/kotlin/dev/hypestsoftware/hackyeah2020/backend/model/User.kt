@@ -1,5 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.model
 
+import dev.hypestsoftware.hackyeah2020.backend.model.dto.UserDto
 import java.util.UUID
 import javax.persistence.CascadeType
 import javax.persistence.Column
@@ -36,4 +37,8 @@ class User(
         inverseJoinColumns = [JoinColumn(name = "role_uuid")]
     )
     var roles: MutableSet<Role> = mutableSetOf(),
-)
+) {
+    fun toUserDto() = UserDto(uuid.toString(), username, roles.map { role -> role.name.toString() }.toSet())
+
+    fun toCurrentUserDto() = UserDto(uuid.toString(), username, roles.map { role -> role.name.toString() }.toSet())
+}

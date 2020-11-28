@@ -20,15 +20,7 @@ class ReportServiceImpl(private val reportRepository: ReportRepository) : Report
 
     override fun createNewReport(report: ReportCreateDto): Report {
         // TODO run image processing
-        val (latitude, longitude) = report.location
-
-        return reportRepository.save(
-            Report(
-                description = report.description,
-                location = Location(latitude = latitude, longitude = longitude),
-                status = ReportStatus.NEW,
-            )
-        )
+        return reportRepository.save(report.toEntity())
     }
 
     override fun updateStatus(uuid: UUID, status: ReportStatus) {
