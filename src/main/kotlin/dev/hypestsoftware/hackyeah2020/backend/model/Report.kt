@@ -42,7 +42,11 @@ class Report(
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var status: ReportStatus
+    var status: ReportStatus,
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    var boarStatus: ReportBoarStatus
 ) {
     fun toReportDto(): ReportDto {
         return ReportDto(
