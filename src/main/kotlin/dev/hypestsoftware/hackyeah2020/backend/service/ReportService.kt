@@ -1,7 +1,6 @@
 package dev.hypestsoftware.hackyeah2020.backend.service
 
 import dev.hypestsoftware.hackyeah2020.backend.exception.base.ApiErrorCode
-import dev.hypestsoftware.hackyeah2020.backend.model.Location
 import dev.hypestsoftware.hackyeah2020.backend.model.Report
 import dev.hypestsoftware.hackyeah2020.backend.model.ReportStatus
 import dev.hypestsoftware.hackyeah2020.backend.model.dto.ReportCreateDto
@@ -20,16 +19,7 @@ class ReportServiceImpl(private val reportRepository: ReportRepository) : Report
 
     override fun createNewReport(report: ReportCreateDto): Report {
         // TODO run image processing
-        val (latitude, longitude) = report.location
-
-        return reportRepository.save(
-            Report(
-                description = report.description,
-                location = Location(latitude = latitude, longitude = longitude),
-                image = report.image.toByteArray(),
-                status = ReportStatus.NEW,
-            )
-        )
+        return reportRepository.save(report.toEntity())
     }
 
     override fun updateStatus(uuid: UUID, status: ReportStatus) {
