@@ -49,6 +49,7 @@ class ResourceServerConfiguration(
             .antMatchers("/status").permitAll()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
             .antMatchers("$PUBLIC_API_ENDPOINT_V1/reports/**").permitAll()
+            .antMatchers("$PUBLIC_API_ENDPOINT_V1/users/register").permitAll()
             .anyRequest().authenticated()
     }
 }
