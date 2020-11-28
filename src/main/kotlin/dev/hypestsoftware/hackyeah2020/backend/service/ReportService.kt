@@ -41,5 +41,4 @@ class ReportServiceImpl(private val reportRepository: ReportRepository) : Report
     override fun getReportByUuid(uuid: UUID): Report {
         return reportRepository.findByUuid(uuid) ?: ApiErrorCode.REPORT_ERR_0001.throwException()
     }
-
 }
