@@ -1,10 +1,14 @@
 package dev.hypestsoftware.hackyeah2020.backend.model
 
 import org.springframework.data.annotation.CreatedDate
-import java.sql.Timestamp
+import java.time.LocalDateTime
 import java.util.UUID
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.OneToOne
@@ -20,17 +24,18 @@ class Report(
 
     @CreatedDate
     @Column(nullable = false)
-    val createdAt: Timestamp,
+    val createdAt: LocalDateTime = LocalDateTime.now(),
 
     @Column(nullable = false)
     val description: String,
 
     @Column(nullable = false)
-    val imageUrl: String,
+    var imageUrl: String = "",
 
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     val location: Location,
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val status: String
+    var status: ReportStatus
 )
