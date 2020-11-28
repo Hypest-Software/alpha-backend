@@ -1,7 +1,7 @@
 package dev.hypestsoftware.hackyeah2020.backend.model
 
 import org.springframework.data.annotation.CreatedDate
-import java.sql.Timestamp
+import java.time.LocalDateTime
 import java.util.UUID
 import javax.persistence.CascadeType
 import javax.persistence.Column
@@ -23,7 +23,7 @@ class Report(
 
     @CreatedDate
     @Column(nullable = false)
-    val createdAt: Timestamp = Timestamp(0),
+    val createdAt: LocalDateTime = LocalDateTime.now(),
 
     @Column(nullable = false)
     val description: String,
