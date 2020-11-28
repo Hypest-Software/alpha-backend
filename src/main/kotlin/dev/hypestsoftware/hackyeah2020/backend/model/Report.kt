@@ -55,7 +55,8 @@ class Report(
             description,
             String(image),
             location.toLocationDto(),
-            status.toString()
+            status.toString(),
+            boarStatus.toString()
         )
     }
 }
