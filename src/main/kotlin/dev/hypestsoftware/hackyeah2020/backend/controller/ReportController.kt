@@ -19,7 +19,7 @@ import java.util.UUID
 class ReportController(private val reportService: ReportService) {
 
     @PostMapping
-    fun createReport(@RequestBody report: ReportCreateDto): ResponseEntity<UUID> {
+    fun createReport(@RequestBody report: ReportCreateDto): ResponseEntity<Report> {
         return ResponseEntity.ok(reportService.createNewReport(report))
     }
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 import java.util.UUID
 
 interface ReportService {
-    fun createNewReport(report: ReportCreateDto): UUID
+    fun createNewReport(report: ReportCreateDto): Report
     fun updateStatus(uuid: UUID, status: ReportStatus)
     fun getReportByUuid(uuid: UUID): Report
 }
@@ -18,18 +18,17 @@ interface ReportService {
 @Service
 class ReportServiceImpl(private val reportRepository: ReportRepository) : ReportService {
 
-    override fun createNewReport(report: ReportCreateDto): UUID {
+    override fun createNewReport(report: ReportCreateDto): Report {
         //TODO run image processing
         val (latitude, longitude) = report.location
 
-        val savedReport = reportRepository.save(
+        return reportRepository.save(
             Report(
                 description = report.description,
                 location = Location(latitude = latitude, longitude = longitude),
                 status = ReportStatus.NEW.toString(),
             )
         )
-        return savedReport.uuid
     }
 
     override fun updateStatus(uuid: UUID, status: ReportStatus) {
