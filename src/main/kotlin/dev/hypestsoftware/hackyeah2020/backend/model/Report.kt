@@ -8,6 +8,7 @@ import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.OneToOne
@@ -31,7 +32,7 @@ class Report(
     @Column(nullable = false)
     var imageUrl: String = "",
 
-    @OneToOne(optional = false, cascade = [CascadeType.ALL])
+    @OneToOne(optional = false, cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     val location: Location,
 
     @Enumerated(EnumType.STRING)
