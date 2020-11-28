@@ -1,6 +1,7 @@
 package dev.hypestsoftware.hackyeah2020.backend.config
 
 import dev.hypestsoftware.hackyeah2020.backend.exception.base.RestExceptionHandler
+import dev.hypestsoftware.hackyeah2020.backend.utils.PUBLIC_API_ENDPOINT_V1
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
 import org.springframework.http.ResponseEntity
@@ -47,6 +48,7 @@ class ResourceServerConfiguration(
             .authorizeRequests()
             .antMatchers("/status").permitAll()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .antMatchers("$PUBLIC_API_ENDPOINT_V1/reports/**").permitAll()
             .anyRequest().authenticated()
     }
 }
