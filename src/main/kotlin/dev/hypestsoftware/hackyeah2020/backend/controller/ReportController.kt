@@ -18,7 +18,7 @@ import java.util.UUID
 @RequestMapping("$PUBLIC_API_ENDPOINT_V1/reports")
 class ReportController(private val reportService: ReportService) {
 
-    @PostMapping()
+    @PostMapping
     fun createReport(@RequestBody report: ReportCreateDto): ResponseEntity<UUID> {
         return ResponseEntity.ok(reportService.createNewReport(report))
     }
